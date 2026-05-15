@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sri Santhana Vinayagar Temple | Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #FDF8F0 0%, #F9EFE0 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            animation: bgFade 0.8s ease-out;
+        }
+
+        @keyframes bgFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes floatUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.3); }
+            70% { box-shadow: 0 0 0 12px rgba(230, 126, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+
+        /* Decorative elements */
+        body::before {
+            content: "🕉️";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            opacity: 0.1;
+            font-family: serif;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "🌿";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 70px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            animation: floatUp 0.8s ease forwards;
+        }
+
+        .login-box {
+            background: rgba(255, 252, 245, 0.98);
+            backdrop-filter: blur(2px);
+            padding: 2.2rem 2rem;
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .login-box:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Temple logo / icon */
+        .temple-icon {
+            font-size: 3.5rem;
+            color: #D35400;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            animation: gentlePulse 2s infinite;
+        }
+
+        h2 {
+            color: #8B4513;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #B96F30;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px dashed #F0CFA0;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #A0522D;
+            margin: 1rem 0 1.2rem;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 12px 0;
+            border: 1px solid #E2C7A3;
+            border-radius: 60px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            background: #FFFDF9;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #E67E22;
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+            background: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(95deg, #D35400, #E67E22);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 12px rgba(211, 84, 0, 0.25);
+        }
+
+        button:hover {
+            background: linear-gradient(95deg, #B64926, #D35400);
+            transform: scale(1.01);
+            box-shadow: 0 8px 18px rgba(211, 84, 0, 0.35);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #message {
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: #C0392B;
+            background: #FEF2E8;
+            padding: 8px 12px;
+            border-radius: 60px;
+            display: inline-block;
+            width: auto;
+        }
+
+        .footer-note {
+            margin-top: 1.2rem;
+            font-size: 0.7rem;
+            color: #A98157;
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 1.8rem 1.5rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="temple-icon">
+                <i class="fas fa-om"></i>
+            </div>
+            <h2>Sri Santhana Vinayagar Temple</h2>
+            <div class="subtitle">Navalpur, Sangam Street</div>
+            <h3><i class="fas fa-key"></i> Devotee Login</h3>
+            
+            <input type="text" id="username" placeholder="Username" autocomplete="off" />
+            <input type="password" id="password" placeholder="Password" />
+            <button onclick="login()">Login <i class="fas fa-arrow-right"></i></button>
+            <p id="message"></p>
+            
+            <div class="footer-note">
+                <i class="fas fa-praying-hands"></i> Admin / User access via server
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Original login logic preserved exactly as provided
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const messageEl = document.getElementById("message");
+
+            // Show loading indicator
+            messageEl.style.color = "#D35400";
+            messageEl.innerText = "⏳ Authenticating...";
+
+            fetch("http://localhost:9090/users/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            })
+            .then(res => res.text())
+            .then(data => {
+                console.log("Server response:", data);
+                if (data === "LOGIN_SUCCESS:ADMIN") {
+                    window.location.href = "admin.html";
+                } else if (data === "LOGIN_SUCCESS:USER") {
+                    window.location.href = "home.html";
+                } else {
+                    messageEl.style.color = "#C0392B";
+                    messageEl.innerText = "❌ Invalid username or password! Please try again.";
+                }
+            })
+            .catch(err => {
+                console.error("Login error:", err);
+                messageEl.style.color = "#C0392B";
+                messageEl.innerText = "⚠️ Server connection failed. Ensure backend is running on localhost:9090";
+            });
+        }
+
+        // Allow pressing Enter to login
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sri Santhana Vinayagar Temple | Donate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #FDF8F0 0%, #F9EFE0 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            animation: pageFade 0.8s ease-out;
+        }
+
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gentleFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(230, 126, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h2 {
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar h2:before {
+            content: "🕉️";
+            font-size: 1.8rem;
+        }
+
+        .navbar button {
+            background: #FFE0B5;
+            color: #5D2E0C;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar button:hover {
+            background: #FFD27A;
+            transform: scale(1.02);
+        }
+
+        .report-btn {
+            position: fixed;
+            top: 90px;
+            right: 24px;
+            background: linear-gradient(95deg, #D35400, #E67E22);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 60px;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 99;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .report-btn:hover {
+            background: linear-gradient(95deg, #B64926, #D35400);
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(211,84,0,0.3);
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 1rem 1.5rem 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000000;
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .temple-badge {
+            font-size: 0.9rem;
+            color: #B96F30;
+            margin-bottom: 2rem;
+        }
+
+        .qr-box {
+            background: rgba(255, 252, 245, 0.95);
+            padding: 2rem;
+            border-radius: 48px;
+            display: inline-block;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            transition: transform 0.2s;
+            animation: gentleFloat 3s infinite ease-in-out;
+        }
+
+        .qr-box:hover {
+            transform: translateY(-6px);
+        }
+
+        .qr-box img {
+            width: 220px;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            background: white;
+            padding: 8px;
+        }
+
+        .qr-box p {
+            margin-top: 1rem;
+            color: #5D3A1A;
+            font-weight: 500;
+        }
+
+        .form-box {
+            background: rgba(255, 252, 245, 0.95);
+            padding: 2rem 2rem 2.2rem;
+            border-radius: 48px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid rgba(230, 126, 34, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .form-box:hover {
+            transform: translateY(-4px);
+        }
+
+        .form-box h3 {
+            color: #A0522D;
+            margin-bottom: 1.2rem;
+            font-size: 1.6rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border: 1px solid #E2C7A3;
+            border-radius: 60px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            background: #FFFDF9;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #E67E22;
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+            background: white;
+        }
+
+        /* Transaction ID field — highlighted */
+        #transactionId {
+            border-color: #D4A96A;
+            background: #FFFBF2;
+        }
+
+        #transactionId:focus {
+            border-color: #C0392B;
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+        }
+
+        .txn-note {
+            font-size: 0.78rem;
+            color: #A0522D;
+            margin: -4px 0 6px 6px;
+            text-align: left;
+            display: block;
+        }
+
+        button.submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(95deg, #D35400, #E67E22);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 16px;
+            transition: all 0.2s;
+            box-shadow: 0 6px 12px rgba(211, 84, 0, 0.25);
+        }
+
+        button.submit-btn:hover {
+            background: linear-gradient(95deg, #B64926, #D35400);
+            transform: scale(1.01);
+            animation: glowPulse 1.5s infinite;
+        }
+
+        #message {
+            margin-top: 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 60px;
+            display: inline-block;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            border-top: 1px dashed #E2C29B;
+            font-size: 0.8rem;
+            color: #7A5C3A;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .report-btn {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                position: fixed;
+            }
+            .qr-box img {
+                width: 180px;
+            }
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Sri Santhana Vinayagar Temple</h2>
+    <button onclick="window.location.href='home.html'"><i class="fas fa-arrow-left"></i> Back to Home</button>
+</div>
+
+<button class="report-btn" onclick="window.location.href='report.html'">
+    <i class="fas fa-chart-line"></i> View Report
+</button>
+
+<div class="content">
+    <h2><i class="fas fa-hand-holding-heart"></i> Offer Your Seva</h2>
+    <div class="temple-badge">Navalpur, Sangam Street • Under the Sacred Banyan</div>
+
+    <div class="qr-box">
+        <img src="https://raw.githubusercontent.com/saro1305-Saravanan/temple-donation-system/2741f228fc6c9b55b5c71edb746355cdf8c6e5ac/qr.png" alt="GPay QR Code" />
+        <p><i class="fas fa-qrcode"></i> Scan using GPay / PhonePe / UPI</p>
+        <small style="color:#B96F30;">Maha Kumbhabhishekam Donation</small>
+    </div>
+
+    <div class="form-box">
+        <h3>📝 After Payment — Submit Details</h3>
+
+        <input type="text" id="name" placeholder="Your Full Name *" autocomplete="off" />
+
+        <input type="number" id="amount" placeholder="Amount Paid (₹) *" />
+
+        <input type="text" id="upiId" placeholder="Your UPI ID (e.g. name@gpay)" />
+
+        <input type="text" id="transactionId" placeholder="UPI Transaction ID *" autocomplete="off" />
+        <span class="txn-note">
+            <i class="fas fa-info-circle"></i>
+            Find Transaction ID in GPay / PhonePe under payment history (e.g. T2605141234567890)
+        </span>
+
+        <button class="submit-btn" onclick="submitDonation()">
+            <i class="fas fa-check-circle"></i> Submit Donation
+        </button>
+        <p id="message"></p>
+    </div>
+</div>
+
+<div class="footer-note">
+    <i class="fas fa-om"></i> Sri Santhana Vinayagar Temple • Donations towards Maha Kumbhabhishekam 2026
+</div>
+
+<script>
+    function submitDonation() {
+        const name = document.getElementById("name").value.trim();
+        const amount = document.getElementById("amount").value.trim();
+        const upiId = document.getElementById("upiId").value.trim();
+        const transactionId = document.getElementById("transactionId").value.trim();
+        const messageEl = document.getElementById("message");
+
+        // Validation
+        if (!name) {
+            messageEl.style.color = "#C0392B";
+            messageEl.innerText = "❌ Please enter your full name!";
+            return;
+        }
+        if (!amount || amount <= 0) {
+            messageEl.style.color = "#C0392B";
+            messageEl.innerText = "❌ Please enter a valid amount!";
+            return;
+        }
+        if (!transactionId) {
+            messageEl.style.color = "#C0392B";
+            messageEl.innerText = "❌ Please enter your UPI Transaction ID!";
+            return;
+        }
+
+        // Show loading
+        messageEl.style.color = "#D35400";
+        messageEl.innerText = "⏳ Submitting donation...";
+
+        fetch("http://localhost:9090/donations/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                donorName: name,
+                amount: amount,
+                upiId: upiId,
+                transactionId: transactionId
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            messageEl.style.color = "#2E7D32";
+            messageEl.innerHTML = "✅ Thank you! Donation recorded. Admin will verify shortly. Sri Santhana Vinayagar bless you! 🙏";
+            // Clear form
+            document.getElementById("name").value = "";
+            document.getElementById("amount").value = "";
+            document.getElementById("upiId").value = "";
+            document.getElementById("transactionId").value = "";
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            messageEl.style.color = "#C0392B";
+            messageEl.innerText = "⚠️ Server error. Please try again later.";
+        });
+    }
+</script>
+</body>
+</html>

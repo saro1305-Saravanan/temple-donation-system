@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sri Santhana Vinayagar Temple | Donation Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(145deg, #FDF8F0 0%, #F9EFE0 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0; min-height: 100vh;
+            animation: pageFade 0.8s ease-out;
+        }
+
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(230,126,34,0.3); }
+            70% { box-shadow: 0 0 0 10px rgba(230,126,34,0); }
+            100% { box-shadow: 0 0 0 0 rgba(230,126,34,0); }
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .navbar h2 {
+            font-size: 1.6rem; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .navbar h2:before { content: "🕉️"; font-size: 1.8rem; }
+
+        .navbar button {
+            background: #FFE0B5; color: #5D2E0C;
+            border: none; padding: 8px 20px; border-radius: 40px;
+            cursor: pointer; font-weight: bold; font-size: 0.9rem;
+            transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar button:hover { background: #FFD27A; transform: scale(1.02); }
+
+        /* ── Content ── */
+        .content {
+            max-width: 1300px; margin: 2rem auto;
+            padding: 0 1.5rem 2rem;
+        }
+
+        /* ── Total Box ── */
+        .total-box {
+            background: linear-gradient(135deg, #D35400, #E67E22);
+            color: white; padding: 1.8rem; border-radius: 48px;
+            text-align: center; font-size: 1.8rem; font-weight: bold;
+            margin-bottom: 2rem; font-family: 'Georgia', serif;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+            animation: pulseGlow 2s infinite;
+        }
+
+        .total-box span {
+            font-size: 2.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.8rem; border-radius: 60px;
+            display: inline-block; margin-left: 10px;
+        }
+
+        /* ── Status Check Box ── */
+        .check-box {
+            background: rgba(255,252,245,0.97);
+            border-radius: 36px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            border: 1px solid rgba(230,126,34,0.25);
+            text-align: center;
+        }
+
+        .check-box h3 {
+            color: #8B4513;
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .check-sub {
+            color: #B96F30;
+            font-size: 0.88rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .check-input-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .check-input-row input {
+            padding: 13px 20px;
+            border: 1px solid #E2C7A3;
+            border-radius: 60px;
+            font-size: 1rem;
+            width: 380px;
+            max-width: 100%;
+            background: #FFFDF9;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .check-input-row input:focus {
+            outline: none;
+            border-color: #E67E22;
+            box-shadow: 0 0 0 3px rgba(230,126,34,0.2);
+        }
+
+        .btn-check {
+            background: linear-gradient(95deg, #8B4513, #A0522D);
+            color: white; border: none;
+            padding: 13px 26px; border-radius: 60px;
+            cursor: pointer; font-weight: bold;
+            font-size: 0.95rem; display: inline-flex;
+            align-items: center; gap: 8px; transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn-check:hover {
+            background: linear-gradient(95deg, #6B3410, #8B4513);
+            transform: scale(1.02);
+        }
+
+        #statusResult { margin-top: 1.2rem; min-height: 24px; }
+
+        .status-card {
+            display: inline-block;
+            padding: 1rem 1.8rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            max-width: 520px;
+            width: 100%;
+            text-align: left;
+            line-height: 2;
+        }
+
+        .status-card.verified  { background: #D4EDDA; border: 1px solid #C3E6CB; color: #155724; }
+        .status-card.pending   { background: #FFF3CD; border: 1px solid #FFECB5; color: #856404; }
+        .status-card.rejected  { background: #F8D7DA; border: 1px solid #F5C6CB; color: #721C24; }
+        .status-card.notfound  { background: #E2E3E5; border: 1px solid #D6D8DB; color: #383D41; }
+
+        .status-card code {
+            background: rgba(0,0,0,0.08);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        /* ── Action Bar ── */
+        .action-bar {
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap;
+            gap: 10px; margin-bottom: 1rem;
+        }
+
+        .download-group { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .btn-pdf {
+            background: linear-gradient(95deg, #C0392B, #E74C3C);
+            color: white; border: none; padding: 11px 22px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.9rem; display: inline-flex; align-items: center;
+            gap: 8px; transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(192,57,43,0.25);
+        }
+
+        .btn-pdf:hover { background: linear-gradient(95deg, #A93226, #C0392B); transform: scale(1.02); }
+
+        .btn-excel {
+            background: linear-gradient(95deg, #1A6B3A, #27AE60);
+            color: white; border: none; padding: 11px 22px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.9rem; display: inline-flex; align-items: center;
+            gap: 8px; transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(39,174,96,0.25);
+        }
+
+        .btn-excel:hover { background: linear-gradient(95deg, #145A32, #1A6B3A); transform: scale(1.02); }
+
+        .refresh-btn {
+            background: linear-gradient(95deg, #8B4513, #A0522D);
+            color: white; border: none; padding: 11px 22px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.9rem; display: inline-flex; align-items: center;
+            gap: 8px; transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .refresh-btn:hover { background: linear-gradient(95deg, #6B3410, #8B4513); transform: scale(1.02); }
+
+        /* ── Table ── */
+        .table-wrapper {
+            overflow-x: auto; border-radius: 32px;
+            background: rgba(255,252,245,0.95);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+
+        table { width: 100%; border-collapse: collapse; background: white; }
+
+        th {
+            background: #8B4513; color: white; padding: 1rem;
+            text-align: left; font-weight: 600; font-size: 0.95rem;
+        }
+
+        td { padding: 1rem; border-bottom: 1px solid #F0E0CD; color: #2C3E2F; }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #FFF3E0; transition: 0.2s; }
+
+        .badge {
+            padding: 4px 14px; border-radius: 60px;
+            font-size: 0.78rem; font-weight: bold; display: inline-block;
+        }
+
+        .badge-VERIFIED { background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+        .badge-PENDING  { background: #FFF3CD; color: #856404; border: 1px solid #FFECB5; }
+        .badge-REJECTED { background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+
+        .empty-row td { text-align: center; padding: 2rem; color: #B96F30; }
+
+        /* ── Footer ── */
+        .footer-note {
+            text-align: center; margin-top: 2.5rem; padding: 1rem;
+            border-top: 1px dashed #E2C29B; font-size: 0.8rem; color: #7A5C3A;
+        }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .total-box { font-size: 1.2rem; padding: 1.2rem; }
+            .total-box span { font-size: 1.8rem; }
+            th, td { padding: 0.75rem; font-size: 0.82rem; }
+            .check-box { padding: 1.2rem 1rem; }
+            .status-card { font-size: 0.88rem; }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Sri Santhana Vinayagar Temple</h2>
+    <button onclick="window.location.href='donation.html'">
+        <i class="fas fa-arrow-left"></i> Back to Donation
+    </button>
+</div>
+
+<div class="content">
+
+    <!-- Total Collection -->
+    <div class="total-box">
+        <i class="fas fa-rupee-sign"></i> Total Verified Seva Collection
+        <span>₹<span id="total">0</span></span>
+    </div>
+
+    <!-- ── Status Check Section ── -->
+    <div class="check-box">
+        <h3><i class="fas fa-search"></i> Check Your Donation Status</h3>
+        <p class="check-sub">
+            Enter your UPI Transaction ID to instantly see the status of your donation
+        </p>
+        <div class="check-input-row">
+            <input
+                type="text"
+                id="checkTxnId"
+                placeholder="Enter Transaction ID (e.g. T2605141234567890)"
+                autocomplete="off"
+                onkeydown="if(event.key==='Enter') checkStatus()"
+            />
+            <button class="btn-check" onclick="checkStatus()">
+                <i class="fas fa-search"></i> Check
+            </button>
+        </div>
+        <div id="statusResult"></div>
+    </div>
+
+    <!-- Download + Refresh -->
+    <div class="action-bar">
+        <div class="download-group">
+            <button class="btn-pdf" onclick="downloadPDF()">
+                <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+            <button class="btn-excel" onclick="downloadExcel()">
+                <i class="fas fa-file-excel"></i> Download Excel
+            </button>
+        </div>
+        <button class="refresh-btn" onclick="loadData()">
+            <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+    </div>
+
+    <!-- Donation Table -->
+    <div class="table-wrapper">
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Devotee Name</th>
+                    <th>Amount (₹)</th>
+                    <th>UPI ID</th>
+                    <th>Transaction ID</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr class="empty-row"><td colspan="7">Loading donations...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="footer-note">
+    <i class="fas fa-om"></i> Sri Santhana Vinayagar Temple, Navalpur, Sangam Street • Maha Kumbhabhishekam 2026
+</div>
+
+<script>
+    let allDonations = [];
+
+    /* ── Load Data ── */
+    function loadData() {
+        fetch("http://localhost:9090/donations/all")
+            .then(res => res.json())
+            .then(data => {
+                allDonations = data;
+                const tbody = document.getElementById("tableBody");
+                tbody.innerHTML = "";
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">🙏 No donations recorded yet. Be the first to offer!</td></tr>';
+                    return;
+                }
+
+                data.forEach((d, index) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${escapeHtml(d.donorName)}</td>
+                            <td><strong>₹${d.amount}</strong></td>
+                            <td>${escapeHtml(d.upiId) || "—"}</td>
+                            <td style="font-family:monospace;font-size:0.82rem;">
+                                ${escapeHtml(d.transactionId) || "—"}
+                            </td>
+                            <td>${new Date(d.paymentTime).toLocaleString()}</td>
+                            <td><span class="badge badge-${d.status}">${d.status}</span></td>
+                        </tr>`;
+                });
+            })
+            .catch(() => {
+                document.getElementById("tableBody").innerHTML =
+                    '<tr class="empty-row"><td colspan="7">⚠️ Failed to load. Ensure backend is running.</td></tr>';
+            });
+
+        fetch("http://localhost:9090/donations/total")
+            .then(res => res.json())
+            .then(total => { document.getElementById("total").innerText = total; })
+            .catch(() => {});
+    }
+
+    /* ── Check Donation Status by Transaction ID ── */
+    function checkStatus() {
+        const txnId = document.getElementById("checkTxnId").value.trim();
+        const resultEl = document.getElementById("statusResult");
+
+        if (!txnId) {
+            resultEl.innerHTML = `
+                <div class="status-card notfound">
+                    ⚠️ Please enter your Transaction ID to check status.
+                </div>`;
+            return;
+        }
+
+        // If data already loaded, search directly
+        if (allDonations.length > 0) {
+            showStatusResult(txnId, resultEl);
+            return;
+        }
+
+        // Fetch fresh if not loaded yet
+        resultEl.innerHTML = `<div class="status-card notfound">🔄 Checking...</div>`;
+        fetch("http://localhost:9090/donations/all")
+            .then(res => res.json())
+            .then(data => {
+                allDonations = data;
+                showStatusResult(txnId, resultEl);
+            })
+            .catch(() => {
+                resultEl.innerHTML = `
+                    <div class="status-card notfound">
+                        ⚠️ Server error. Please try again later.
+                    </div>`;
+            });
+    }
+
+    function showStatusResult(txnId, resultEl) {
+        const match = allDonations.find(
+            d => d.transactionId &&
+                 d.transactionId.trim().toLowerCase() === txnId.toLowerCase()
+        );
+
+        if (!match) {
+            resultEl.innerHTML = `
+                <div class="status-card notfound">
+                    🔍 <strong>Transaction ID not found.</strong><br>
+                    <span style="font-weight:normal; font-size:0.88rem;">
+                        Please double-check your Transaction ID and try again.<br>
+                        If you just submitted, wait a moment and try again.
+                    </span>
+                </div>`;
+            return;
+        }
+
+        if (match.status === "VERIFIED") {
+            resultEl.innerHTML = `
+                <div class="status-card verified">
+                    ✅ <strong>Payment Verified Successfully!</strong><br>
+                    <span style="font-weight:normal; font-size:0.9rem;">
+                        👤 Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <strong>${escapeHtml(match.donorName)}</strong><br>
+                        💰 Amount &nbsp;: <strong>₹${match.amount}</strong><br>
+                        🔖 Txn ID &nbsp;&nbsp;: <code>${escapeHtml(match.transactionId)}</code><br>
+                        🙏 Sri Santhana Vinayagar bless you abundantly!
+                    </span>
+                </div>`;
+
+        } else if (match.status === "PENDING") {
+            resultEl.innerHTML = `
+                <div class="status-card pending">
+                    ⏳ <strong>Payment is Pending Verification.</strong><br>
+                    <span style="font-weight:normal; font-size:0.9rem;">
+                        👤 Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <strong>${escapeHtml(match.donorName)}</strong><br>
+                        💰 Amount &nbsp;: <strong>₹${match.amount}</strong><br>
+                        🔖 Txn ID &nbsp;&nbsp;: <code>${escapeHtml(match.transactionId)}</code><br>
+                        Your payment is being reviewed by the admin. Please check back shortly.
+                    </span>
+                </div>`;
+
+        } else if (match.status === "REJECTED") {
+            resultEl.innerHTML = `
+                <div class="status-card rejected">
+                    ❌ <strong>Transaction ID is invalid or already entered.</strong><br>
+                    <span style="font-weight:normal; font-size:0.9rem;">
+                        🔖 Txn ID &nbsp;&nbsp;: <code>${escapeHtml(match.transactionId)}</code><br>
+                        Your transaction could not be verified by the admin.<br>
+                        This may be because the Transaction ID is incorrect or has already been used.<br><br>
+                        📞 Please contact the temple office for assistance.<br>
+                        📍 Navalpur, Sangam Street, Under the Sacred Banyan.
+                    </span>
+                </div>`;
+        }
+    }
+
+    /* ── PDF Download ── */
+    function downloadPDF() {
+        if (allDonations.length === 0) { alert("No data to download!"); return; }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: "landscape" });
+
+        doc.setFontSize(16);
+        doc.setTextColor(139, 69, 19);
+        doc.text("Sri Santhana Vinayagar Temple", 14, 16);
+
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text("Maha Kumbhabhishekam 2026 — Donation Report", 14, 23);
+        doc.text("Generated: " + new Date().toLocaleString(), 14, 29);
+
+        doc.setFontSize(12);
+        doc.setTextColor(211, 84, 0);
+        doc.text("Total Verified Collection: Rs. " + document.getElementById("total").innerText, 14, 37);
+
+        const rows = allDonations.map((d, i) => [
+            i + 1,
+            d.donorName || "",
+            "Rs. " + d.amount,
+            d.upiId || "—",
+            d.transactionId || "—",
+            new Date(d.paymentTime).toLocaleString(),
+            d.status
+        ]);
+
+        doc.autoTable({
+            startY: 42,
+            head: [["#", "Devotee Name", "Amount", "UPI ID", "Transaction ID", "Date & Time", "Status"]],
+            body: rows,
+            headStyles: { fillColor: [139, 69, 19], textColor: 255, fontStyle: "bold" },
+            alternateRowStyles: { fillColor: [255, 248, 240] },
+            styles: { fontSize: 9, cellPadding: 4 },
+            columnStyles: { 2: { halign: "right" } }
+        });
+
+        doc.save("Temple_Donation_Report_" + new Date().toISOString().slice(0,10) + ".pdf");
+    }
+
+    /* ── Excel Download ── */
+    function downloadExcel() {
+        if (allDonations.length === 0) { alert("No data to download!"); return; }
+
+        const rows = allDonations.map((d, i) => ({
+            "S.No":           i + 1,
+            "Devotee Name":   d.donorName || "",
+            "Amount (Rs.)":   d.amount,
+            "UPI ID":         d.upiId || "",
+            "Transaction ID": d.transactionId || "",
+            "Date & Time":    new Date(d.paymentTime).toLocaleString(),
+            "Status":         d.status
+        }));
+
+        const summary = [
+            { "S.No": "Sri Santhana Vinayagar Temple — Donation Report" },
+            { "S.No": "Maha Kumbhabhishekam 2026" },
+            { "S.No": "Generated: " + new Date().toLocaleString() },
+            { "S.No": "Total Verified: Rs. " + document.getElementById("total").innerText },
+            {}
+        ];
+
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet([...summary, ...rows], { skipHeader: false });
+
+        ws["!cols"] = [
+            { wch: 6 }, { wch: 24 }, { wch: 14 },
+            { wch: 22 }, { wch: 22 }, { wch: 22 }, { wch: 12 }
+        ];
+
+        XLSX.utils.book_append_sheet(wb, ws, "Donations");
+        XLSX.writeFile(wb, "Temple_Donation_Report_" + new Date().toISOString().slice(0,10) + ".xlsx");
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[m]));
+    }
+
+    loadData();
+    setInterval(loadData, 10000);
+</script>
+</body>
+</html>
