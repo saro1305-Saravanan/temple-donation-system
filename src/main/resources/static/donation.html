@@ -355,7 +355,7 @@
         messageEl.style.color = "#D35400";
         messageEl.innerText = "⏳ Submitting donation...";
 
-        fetch("http://localhost:9090/donations/add", {
+        fetch("http://localhost:8081/donations/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
