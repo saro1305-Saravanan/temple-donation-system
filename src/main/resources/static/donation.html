@@ -355,7 +355,7 @@
         messageEl.style.color = "#D35400";
         messageEl.innerText = "⏳ Submitting donation...";
 
-        fetch("http://localhost:8081/donations/add", {
+        fetch("https://temple-donation-system.onrender.com/donations/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
