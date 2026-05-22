@@ -297,7 +297,7 @@
     let allDonations = [];
 
     function loadData() {
-        fetch("http://localhost:8081/donations/all")
+        fetch("https://temple-donation-system.onrender.com/donations/total")
             .then(res => res.json())
             .then(data => {
                 allDonations = data;
@@ -309,7 +309,7 @@
                     '<tr class="empty-row"><td colspan="7">⚠️ Cannot connect. Is Spring Boot running?</td></tr>';
             });
 
-        fetch("http://localhost:8081/donations/total")
+        fetch("https://temple-donation-system.onrender.com/donations/total")
             .then(res => res.json())
             .then(t => { document.getElementById("totalVerified").innerText = t; })
             .catch(() => {});
