@@ -343,7 +343,7 @@
 
     /* ── Load Data ── */
     function loadData() {
-        fetch("http://localhost:8081/donations/all")
+        fetch("https://temple-donation-system.onrender.com/donations/all")
             .then(res => res.json())
             .then(data => {
                 allDonations = data;
@@ -375,7 +375,7 @@
                     '<tr class="empty-row"><td colspan="7">⚠️ Failed to load. Ensure backend is running.</td></tr>';
             });
 
-        fetch("http://localhost:8081/donations/total")
+        fetch("https://temple-donation-system.onrender.com/donations/all")
             .then(res => res.json())
             .then(total => { document.getElementById("total").innerText = total; })
             .catch(() => {});
@@ -402,7 +402,7 @@
 
         // Fetch fresh if not loaded yet
         resultEl.innerHTML = `<div class="status-card notfound">🔄 Checking...</div>`;
-        fetch("http://localhost:8081/donations/all")
+        fetch("https://temple-donation-system.onrender.com/donations/all")
             .then(res => res.json())
             .then(data => {
                 allDonations = data;
