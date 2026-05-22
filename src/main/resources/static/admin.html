@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sri Santhana Vinayagar Temple | Admin Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(145deg, #FDF8F0 0%, #F9EFE0 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh; animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .navbar {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        .navbar h2 {
+            font-size: 1.5rem; display: flex; align-items: center;
+            gap: 10px; font-family: 'Georgia', serif;
+        }
+
+        .navbar button {
+            background: #FFE0B5; color: #5D2E0C; border: none;
+            padding: 8px 20px; border-radius: 40px; cursor: pointer;
+            font-weight: bold; font-size: 0.9rem; transition: 0.2s;
+        }
+
+        .navbar button:hover { background: #FFD27A; transform: scale(1.02); }
+
+        .content { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; }
+
+        h2 { color: #000; font-family: 'Georgia', serif; margin-bottom: 1rem; }
+
+        /* Stats row */
+        .stats-row {
+            display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1; min-width: 140px; padding: 1.2rem 1.5rem;
+            border-radius: 28px; color: white; font-weight: bold;
+            text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .stat-card .label { font-size: 0.78rem; opacity: 0.85; margin-bottom: 4px; }
+        .stat-card .value { font-size: 1.8rem; font-family: 'Georgia', serif; }
+        .stat-total    { background: linear-gradient(135deg, #8B4513, #A0522D); }
+        .stat-pending  { background: linear-gradient(135deg, #E67E22, #F39C12); }
+        .stat-verified { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+        .stat-rejected { background: linear-gradient(135deg, #C0392B, #E74C3C); }
+
+        /* Nav cards */
+        .cards {
+            display: flex; justify-content: center;
+            gap: 24px; flex-wrap: wrap; margin: 1.5rem 0 2rem;
+        }
+
+        .card {
+            background: rgba(255,252,245,0.95); padding: 1.6rem;
+            border-radius: 28px; box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            width: 180px; cursor: pointer; text-align: center;
+            transition: all 0.2s; border: 1px solid rgba(230,126,34,0.3);
+        }
+
+        .card:hover { transform: translateY(-5px); background: #FFF8F0; border-color: #E67E22; }
+        .card p { font-size: 2.8rem; margin-bottom: 0.5rem; }
+        .card h3 { color: #D35400; font-size: 1rem; }
+
+        /* Section */
+        .section {
+            background: rgba(255,252,245,0.95); border-radius: 36px;
+            padding: 1.5rem; margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            border: 1px solid rgba(230,126,34,0.2);
+        }
+
+        .section-header {
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            color: #8B4513; font-size: 1.4rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .table-wrapper { overflow-x: auto; border-radius: 20px; }
+
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden; }
+
+        th { background: #8B4513; color: white; padding: 12px 14px; text-align: left; font-size: 0.9rem; }
+
+        td { padding: 11px 14px; border-bottom: 1px solid #F0E0CD; vertical-align: middle; font-size: 0.9rem; }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #FFF3E0; }
+
+        .badge {
+            padding: 4px 12px; border-radius: 60px;
+            font-size: 0.75rem; font-weight: bold; display: inline-block;
+        }
+
+        .badge-VERIFIED { background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+        .badge-PENDING  { background: #FFF3CD; color: #856404; border: 1px solid #FFECB5; }
+        .badge-REJECTED { background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+
+        .btn-verify {
+            background: linear-gradient(95deg, #219653, #27AE60);
+            color: white; border: none; padding: 7px 16px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.82rem; margin-right: 6px; transition: 0.2s; white-space: nowrap;
+        }
+
+        .btn-verify:hover { background: linear-gradient(95deg, #1A7A43, #219653); transform: scale(1.03); }
+
+        .btn-reject {
+            background: linear-gradient(95deg, #C0392B, #E74C3C);
+            color: white; border: none; padding: 7px 16px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.82rem; transition: 0.2s; white-space: nowrap;
+        }
+
+        .btn-reject:hover { background: linear-gradient(95deg, #A93226, #C0392B); transform: scale(1.03); }
+
+        .refresh-btn {
+            background: linear-gradient(95deg, #8B4513, #A0522D);
+            color: white; border: none; padding: 9px 20px;
+            border-radius: 60px; cursor: pointer; font-weight: bold;
+            font-size: 0.85rem; display: inline-flex; align-items: center;
+            gap: 7px; transition: 0.2s;
+        }
+
+        .refresh-btn:hover { background: linear-gradient(95deg, #6B3410, #8B4513); transform: scale(1.02); }
+
+        .empty-row td { text-align: center; padding: 1.5rem; color: #B96F30; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2C3E50; color: white;
+            padding: 13px 26px; border-radius: 60px;
+            font-size: 0.95rem; font-weight: bold;
+            z-index: 9999; transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 0; box-shadow: 0 8px 20px rgba(0,0,0,0.25); white-space: nowrap;
+        }
+
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.success { background: linear-gradient(95deg, #219653, #27AE60); }
+        .toast.error   { background: linear-gradient(95deg, #C0392B, #E74C3C); }
+        .toast.info    { background: linear-gradient(95deg, #8B4513, #A0522D); }
+
+        .footer-note {
+            text-align: center; margin-top: 2rem; padding: 1rem;
+            border-top: 1px dashed #E2C29B; font-size: 0.8rem; color: #7A5C3A;
+        }
+
+        @media (max-width: 700px) {
+            .cards { gap: 12px; }
+            .card { width: 140px; padding: 1rem; }
+            th, td { font-size: 0.78rem; padding: 8px; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2><i class="fas fa-user-shield"></i> Sri Santhana Vinayagar Temple — Admin</h2>
+    <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+
+<div class="content">
+    <h2>Welcome, Admin! <i class="fas fa-gavel"></i></h2>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-card stat-total">
+            <div class="label">✅ Verified Total</div>
+            <div class="value">₹<span id="totalVerified">0</span></div>
+        </div>
+        <div class="stat-card stat-pending">
+            <div class="label">⏳ Pending</div>
+            <div class="value" id="countPending">0</div>
+        </div>
+        <div class="stat-card stat-verified">
+            <div class="label">✅ Verified</div>
+            <div class="value" id="countVerified">0</div>
+        </div>
+        <div class="stat-card stat-rejected">
+            <div class="label">❌ Rejected</div>
+            <div class="value" id="countRejected">0</div>
+        </div>
+    </div>
+
+    <!-- Nav Cards -->
+    <div class="cards">
+        <div class="card" onclick="window.location.href='home.html'">
+            <p>🛕</p><h3>Temple Info</h3>
+        </div>
+        <div class="card" onclick="window.location.href='donation.html'">
+            <p>💰</p><h3>Donations</h3>
+        </div>
+        <div class="card" onclick="window.location.href='report.html'">
+            <p>📊</p><h3>Full Report</h3>
+        </div>
+    </div>
+
+    <!-- PENDING VERIFICATION -->
+    <div class="section">
+        <div class="section-header">
+            <h3><i class="fas fa-clock"></i> Pending Verification</h3>
+            <button class="refresh-btn" onclick="loadData()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Devotee Name</th>
+                        <th>Amount (₹)</th>
+                        <th>UPI ID</th>
+                        <th>Transaction ID</th>
+                        <th>Submitted At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="pendingBody">
+                    <tr class="empty-row"><td colspan="7">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- VERIFIED DONATIONS -->
+    <div class="section">
+        <h3><i class="fas fa-check-circle"></i> Verified Donations</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Devotee Name</th>
+                        <th>Amount (₹)</th>
+                        <th>UPI ID</th>
+                        <th>Transaction ID</th>
+                        <th>Verified At</th>
+                    </tr>
+                </thead>
+                <tbody id="verifiedBody">
+                    <tr class="empty-row"><td colspan="6">No verified donations yet.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- REJECTED -->
+    <div class="section">
+        <h3><i class="fas fa-times-circle"></i> Rejected Donations</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Devotee Name</th>
+                        <th>Amount (₹)</th>
+                        <th>Transaction ID</th>
+                        <th>Rejected At</th>
+                    </tr>
+                </thead>
+                <tbody id="rejectedBody">
+                    <tr class="empty-row"><td colspan="5">No rejected donations.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer-note">
+    <i class="fas fa-om"></i> Admin Panel • Sri Santhana Vinayagar Temple • Maha Kumbhabhishekam 2026
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    let allDonations = [];
+
+    function loadData() {
+        fetch("http://localhost:8081/donations/all")
+            .then(res => res.json())
+            .then(data => {
+                allDonations = data;
+                updateStats(data);
+                renderTables(data);
+            })
+            .catch(() => {
+                document.getElementById("pendingBody").innerHTML =
+                    '<tr class="empty-row"><td colspan="7">⚠️ Cannot connect. Is Spring Boot running?</td></tr>';
+            });
+
+        fetch("http://localhost:8081/donations/total")
+            .then(res => res.json())
+            .then(t => { document.getElementById("totalVerified").innerText = t; })
+            .catch(() => {});
+    }
+
+    function updateStats(data) {
+        document.getElementById("countPending").innerText  = data.filter(d => d.status === "PENDING").length;
+        document.getElementById("countVerified").innerText = data.filter(d => d.status === "VERIFIED").length;
+        document.getElementById("countRejected").innerText = data.filter(d => d.status === "REJECTED").length;
+    }
+
+    function renderTables(data) {
+        const pending  = data.filter(d => d.status === "PENDING");
+        const verified = data.filter(d => d.status === "VERIFIED");
+        const rejected = data.filter(d => d.status === "REJECTED");
+
+        // Pending
+        const pb = document.getElementById("pendingBody");
+        pb.innerHTML = pending.length === 0
+            ? '<tr class="empty-row"><td colspan="7">✨ No pending verifications!</td></tr>'
+            : pending.map((d, i) => `
+                <tr id="row-${d.id}">
+                    <td>${i + 1}</td>
+                    <td>${escapeHtml(d.donorName)}</td>
+                    <td><strong>₹${d.amount}</strong></td>
+                    <td>${escapeHtml(d.upiId) || "—"}</td>
+                    <td style="font-family:monospace;font-size:0.82rem;">${escapeHtml(d.transactionId) || "—"}</td>
+                    <td>${new Date(d.paymentTime).toLocaleString()}</td>
+                    <td>
+                        <button class="btn-verify" onclick="verifyDonation(${d.id})">
+                            <i class="fas fa-check"></i> Verify
+                        </button>
+                        <button class="btn-reject" onclick="rejectDonation(${d.id})">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                    </td>
+                </tr>`).join('');
+
+        // Verified
+        const vb = document.getElementById("verifiedBody");
+        vb.innerHTML = verified.length === 0
+            ? '<tr class="empty-row"><td colspan="6">📭 No verified donations yet.</td></tr>'
+            : verified.map((d, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${escapeHtml(d.donorName)}</td>
+                    <td><strong>₹${d.amount}</strong></td>
+                    <td>${escapeHtml(d.upiId) || "—"}</td>
+                    <td style="font-family:monospace;font-size:0.82rem;">${escapeHtml(d.transactionId) || "—"}</td>
+                    <td>${new Date(d.paymentTime).toLocaleString()}</td>
+                </tr>`).join('');
+
+        // Rejected
+        const rb = document.getElementById("rejectedBody");
+        rb.innerHTML = rejected.length === 0
+            ? '<tr class="empty-row"><td colspan="5">No rejected donations.</td></tr>'
+            : rejected.map((d, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${escapeHtml(d.donorName)}</td>
+                    <td>₹${d.amount}</td>
+                    <td style="font-family:monospace;font-size:0.82rem;">${escapeHtml(d.transactionId) || "—"}</td>
+                    <td>${new Date(d.paymentTime).toLocaleString()}</td>
+                </tr>`).join('');
+    }
+
+    function verifyDonation(id) {
+        document.getElementById("row-" + id).style.opacity = "0.5";
+        fetch("http://localhost:8081/donations/verify/" + id, { method: "PUT" })
+            .then(res => res.text())
+            .then(result => {
+                if (result === "VERIFIED") {
+                    showToast("✅ Donation Verified & Saved!", "success");
+                    loadData();
+                } else {
+                    showToast("⚠️ Could not verify. Try again.", "error");
+                    document.getElementById("row-" + id).style.opacity = "1";
+                }
+            })
+            .catch(() => {
+                showToast("⚠️ Server error.", "error");
+                document.getElementById("row-" + id).style.opacity = "1";
+            });
+    }
+
+    function rejectDonation(id) {
+        document.getElementById("row-" + id).style.opacity = "0.5";
+        fetch("http://localhost:8081/donations/reject/" + id, { method: "PUT" })
+            .then(res => res.text())
+            .then(result => {
+                if (result === "REJECTED") {
+                    showToast("❌ Donation Rejected!", "info");
+                    loadData();
+                } else {
+                    showToast("⚠️ Could not reject. Try again.", "error");
+                    document.getElementById("row-" + id).style.opacity = "1";
+                }
+            })
+            .catch(() => {
+                showToast("⚠️ Server error.", "error");
+                document.getElementById("row-" + id).style.opacity = "1";
+            });
+    }
+
+    function showToast(msg, type = "info") {
+        const t = document.getElementById("toast");
+        t.innerText = msg;
+        t.className = "toast " + type + " show";
+        setTimeout(() => { t.className = "toast " + type; }, 3500);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[m]));
+    }
+
+    function logout() { window.location.href = "login.html"; }
+
+    loadData();
+    setInterval(loadData, 10000);
+</script>
+</body>
+</html>
