@@ -378,7 +378,7 @@
 
     function verifyDonation(id) {
         document.getElementById("row-" + id).style.opacity = "0.5";
-        fetch("http://localhost:8081/donations/verify/" + id, { method: "PUT" })
+        fetch("https://temple-donation-system.onrender.com/donations/verify/" + id, { method: "PUT" })
             .then(res => res.text())
             .then(result => {
                 if (result === "VERIFIED") {
@@ -397,7 +397,7 @@
 
     function rejectDonation(id) {
         document.getElementById("row-" + id).style.opacity = "0.5";
-        fetch("http://localhost:8081/donations/reject/" + id, { method: "PUT" })
+        fetch("https://temple-donation-system.onrender.com/donations/reject/" + id, { method: "PUT" })
             .then(res => res.text())
             .then(result => {
                 if (result === "REJECTED") {
