@@ -297,7 +297,7 @@
     let allDonations = [];
 
     function loadData() {
-        fetch("https://temple-donation-system.onrender.com/donations/total")
+        fetch("https://temple-donation-system.onrender.com/donations/all")
             .then(res => res.json())
             .then(data => {
                 allDonations = data;
