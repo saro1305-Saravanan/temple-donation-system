@@ -131,6 +131,5 @@ https://temple-donation-system.onrender.com/
 * GitHub
 
 #Author
+Saravanan N
 
-N. Saravanan
-B.Tech Information Technology
