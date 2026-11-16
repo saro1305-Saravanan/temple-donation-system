@@ -100,7 +100,7 @@ https://temple-donation-system.onrender.com/
 
 # User
 
-* Username: USER
+* Username: user
 * Password: 12345
 
 # API Endpoints
